@@ -50,8 +50,4 @@ public class SudokuGenerator {
 		
 		return grid;
 	}
-	
-	public static void main(String ... args) {
-		int [][] test = sudokuGenerator(3);
-	}
 }

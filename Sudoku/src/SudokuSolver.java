@@ -58,14 +58,14 @@ public class SudokuSolver {
 		return false;
 	}
 
-	private static boolean isValidPlacement(int[][] board,  int number, int row, int column){
+	public static boolean isValidPlacement(int[][] board,  int number, int row, int column){
 		return !isNumberInRow(board, number, row) &&
 				!isNumberInColumn(board, number, column) &&
 				!isNumberInSquare(board, number, row, column);
 	}
 
 
-	private static boolean solveBoard(int [][] board){
+	public static boolean solveBoard(int [][] board){
 		for(int row = 0; row<GRID_SIZE; row++){
 			for(int column = 0; column < GRID_SIZE; column++){
 				if(board[row][column] == 0){
@@ -88,7 +88,7 @@ public class SudokuSolver {
 		return true;
 	}
 	
-	private static void printBoard(int[][] board){
+	public static void printBoard(int[][] board){
 		for(int i = 0; i< GRID_SIZE; i++){
 			for(int j = 0; j< GRID_SIZE; j++){
 				System.out.print(board[i][j]+ " ");
