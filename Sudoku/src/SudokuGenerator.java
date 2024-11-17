@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class SudokuGenerator {
 	public static final int GRID_SIZE = 9;
-
 	public static final int EASY = 1;
 	public static final int MEDIUM = 2;
 	public static final int HARD = 3;
@@ -31,7 +30,6 @@ public class SudokuGenerator {
 			nbToBlank = 64;
 			break;
 		}
-		SudokuSolver.printBoard(grid);
 		Random rand = new Random();
 		for(int i = 0; i < GRID_SIZE; i++) {
 			int number = rand.nextInt(9)+1;
@@ -46,7 +44,7 @@ public class SudokuGenerator {
 			
 			grid[rowToBlank][colToBlank] = 0;
 		}
-		SudokuSolver.printBoard(grid);
+		
 		
 		return grid;
 	}

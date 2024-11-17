@@ -41,7 +41,7 @@ public class MainWindow extends Application{
             gridPane.setHgap(10);
             gridPane.setVgap(10);
     
-            Sudoku sudoku = new Sudoku(0);
+            Sudoku sudoku = new Sudoku(1);
             numbers = sudoku.getGrid();
 
         for (int i = 0; i < 9; i++) {
@@ -53,7 +53,13 @@ public class MainWindow extends Application{
                 box.setFill(javafx.scene.paint.Color.rgb(250, 234, 237));
                 box.setStyle("-fx-arc-height: 10; -fx-arc-width: 10;");
 
-                Label label = new Label(Integer.toString(numbers[i][j]));
+                Label label = new Label();
+                if(numbers[i][j] == 0){
+                    label.setText("");
+                }
+                else{
+                    label.setText(Integer.toString(numbers[i][j]));
+                }
                 label.setFont(Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 27));
                 label.setTextFill(javafx.scene.paint.Color.rgb(71,4,42));
 
