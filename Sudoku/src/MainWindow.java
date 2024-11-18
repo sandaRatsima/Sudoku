@@ -16,33 +16,42 @@ import javafx.stage.Stage;
 
 public class MainWindow extends Application{
     static int[][] numbers;
-        static StackPane[][] SudokuGrid = new StackPane[9][9];
-    
-        @Override
-        public void start(Stage primaryStage) {
-            //Taille et Titre de la fenetre principale
-            primaryStage.setTitle("le S");
-            primaryStage.setHeight(1000);
-            primaryStage.setWidth(1000);
-    
-            setGrid(primaryStage);// ajout de la grille de Sudoku
-            
-            
-            
-            
-            primaryStage.show();
-    
-    
-        }
-    
-        public static void setGrid(Stage primaryStage){
-            GridPane gridPane = new GridPane();
-            gridPane.setAlignment(Pos.TOP_CENTER);
-            gridPane.setHgap(10);
-            gridPane.setVgap(10);
-    
-            Sudoku sudoku = new Sudoku(1);
-            numbers = sudoku.getGrid();
+    static StackPane[][] SudokuGrid = new StackPane[9][9];
+
+    @Override
+    public void start(Stage primaryStage) {
+        //Taille et Titre de la fenetre principale
+        primaryStage.setTitle("le S");
+        primaryStage.setHeight(1000);
+        primaryStage.setWidth(1000);
+
+        GridPane main = new GridPane();
+
+        GridPane grid = setGrid();
+        GridPane buttons = setButtons();
+        main.add(grid, 0, 0);
+        main.add(buttons, 0, 1);
+        main.setAlignment(Pos.TOP_CENTER);
+
+        Scene scene = new Scene(main);
+        
+        
+        
+        
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+
+    }
+
+    public static GridPane setGrid(){
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setStyle("-fx-border-color: solid black;");
+
+        Sudoku sudoku = new Sudoku(3);
+        numbers = sudoku.getGrid();
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -51,7 +60,6 @@ public class MainWindow extends Application{
                 box.setWidth(70);
                 box.setHeight(70);
                 box.setFill(javafx.scene.paint.Color.rgb(250, 234, 237));
-                box.setStyle("-fx-arc-height: 10; -fx-arc-width: 10;");
 
                 Label label = new Label();
                 if(numbers[i][j] == 0){
@@ -74,13 +82,23 @@ public class MainWindow extends Application{
         
 
         gridPane.setPadding(new Insets(10,10,10,10));
-        Scene scene = new Scene(gridPane, 900, 900);
-        scene.setFill(javafx.scene.paint.Color.BEIGE);
-        primaryStage.setScene(scene);
-
+        gridPane.setAlignment(Pos.TOP_CENTER);
+        return gridPane;
     }
 
+    public static GridPane setButtons(){
+        GridPane Buttons = new GridPane();
+        Buttons.setHgap(10);
+        for (int i = 0; i < SudokuGrid.length; i++) {
+            Button button = new Button(Integer.toString(i+1));
+            button.setBackground(null);
+            button.setFont(Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 27));
+            Buttons.add(button, i, 0);
+        }
 
+        Buttons.setPadding(new Insets(10));
+        return Buttons;
+    }
     public static void main(String[] args) {
         launch(args);
     }
