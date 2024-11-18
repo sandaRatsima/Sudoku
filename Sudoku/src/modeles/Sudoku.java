@@ -1,3 +1,4 @@
+package modeles;
 public class Sudoku {
     private int[][] grid;
     public Sudoku(int difficulty){

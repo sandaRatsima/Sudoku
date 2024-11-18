@@ -1,3 +1,4 @@
+package handlers;
 import javafx.event.ActionEvent;
 import javafx.scene.Cursor;
 import javafx.scene.control.Toggle;

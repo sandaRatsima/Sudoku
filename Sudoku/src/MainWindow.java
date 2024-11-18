@@ -1,3 +1,4 @@
+import handlers.ButtonHandler;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,6 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import modeles.Sudoku;
 
 
 public class MainWindow extends Application{

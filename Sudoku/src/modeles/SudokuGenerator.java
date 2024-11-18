@@ -1,3 +1,4 @@
+package modeles;
 import java.util.Random;
 
 public class SudokuGenerator {
