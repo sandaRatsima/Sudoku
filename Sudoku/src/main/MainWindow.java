@@ -1,4 +1,6 @@
+package main;
 import handlers.ButtonHandler;
+import handlers.GridHandler;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +23,7 @@ public class MainWindow extends Application{
     @Override
     public void start(Stage primaryStage) {
         //Taille et Titre de la fenetre principale
-        primaryStage.setTitle("le S");
+        primaryStage.setTitle("Sudoku");
         primaryStage.setHeight(1000);
         primaryStage.setWidth(1000);
 
@@ -62,6 +64,11 @@ public class MainWindow extends Application{
                 box.setWidth(70);
                 box.setHeight(70);
                 box.setFill(javafx.scene.paint.Color.rgb(250, 234, 237));
+
+
+                //ajouter les handlers au grid
+                box.setOnMouseClicked(GridHandler.setOnMouseClicked());
+                box.setOnMouseEntered(GridHandler.setOnMouseEntered());
 
                 Label label = new Label();
                 if(numbers[i][j] == 0){
@@ -112,7 +119,9 @@ public class MainWindow extends Application{
         return Buttons;
     }
 
-    
+    public static StackPane[][] getSudokuGrid(){
+        return SudokuGrid;
+    }    
 
     public static void main(String[] args) {
         launch(args);
