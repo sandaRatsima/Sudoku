@@ -8,8 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -18,6 +24,7 @@ import modeles.Sudoku;
 
 public class MainWindow extends Application{
     static int[][] numbers;
+    static int[][] solution;
     static StackPane[][] SudokuGrid = new StackPane[9][9];
 
     @Override
@@ -50,8 +57,6 @@ public class MainWindow extends Application{
 
     public static GridPane setGrid(){
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
         gridPane.setStyle("-fx-background-color: solid black;");
 
         Sudoku sudoku = new Sudoku(3);
@@ -89,7 +94,7 @@ public class MainWindow extends Application{
         }
 
         
-
+        stylePane();
         gridPane.setPadding(new Insets(10,10,10,10));
         gridPane.setAlignment(Pos.TOP_CENTER);
         return gridPane;
@@ -121,7 +126,22 @@ public class MainWindow extends Application{
 
     public static StackPane[][] getSudokuGrid(){
         return SudokuGrid;
-    }    
+    } 
+    
+    public static void stylePane(){
+        StackPane[][] grid = SudokuGrid;
+        
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                grid[i][j].setBorder(new Border(new BorderStroke(
+                    Color.BLACK,
+                    BorderStrokeStyle.SOLID,
+                    new CornerRadii(5),
+                    new BorderWidths(1)
+                )));
+            }
+        }
+    }
 
     public static void main(String[] args) {
         launch(args);
