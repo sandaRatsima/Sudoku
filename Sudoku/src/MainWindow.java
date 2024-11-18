@@ -1,12 +1,11 @@
-import org.w3c.dom.css.Rect;
-
 import javafx.application.Application;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
@@ -29,6 +28,8 @@ public class MainWindow extends Application{
 
         GridPane grid = setGrid();
         GridPane buttons = setButtons();
+        grid.setAlignment(Pos.TOP_CENTER);
+        buttons.setAlignment(Pos.BOTTOM_CENTER);
         main.add(grid, 0, 0);
         main.add(buttons, 0, 1);
         main.setAlignment(Pos.TOP_CENTER);
@@ -48,7 +49,7 @@ public class MainWindow extends Application{
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
-        gridPane.setStyle("-fx-border-color: solid black;");
+        gridPane.setStyle("-fx-background-color: solid black;");
 
         Sudoku sudoku = new Sudoku(3);
         numbers = sudoku.getGrid();
@@ -68,7 +69,7 @@ public class MainWindow extends Application{
                 else{
                     label.setText(Integer.toString(numbers[i][j]));
                 }
-                label.setFont(Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 27));
+                label.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.BOLD, 27));
                 label.setTextFill(javafx.scene.paint.Color.rgb(71,4,42));
 
 
@@ -88,17 +89,30 @@ public class MainWindow extends Application{
 
     public static GridPane setButtons(){
         GridPane Buttons = new GridPane();
+        ToggleGroup toggleGroup = new ToggleGroup();
         Buttons.setHgap(10);
         for (int i = 0; i < SudokuGrid.length; i++) {
-            Button button = new Button(Integer.toString(i+1));
+            ToggleButton button = new ToggleButton(Integer.toString(i+1));
             button.setBackground(null);
-            button.setFont(Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 27));
-            Buttons.add(button, i, 0);
+            button.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.EXTRA_BOLD, 37));
+
+            //ajouter les handlers
+            button.setOnMouseEntered(ButtonHandler.setMouseHover());
+            button.setOnMouseExited(ButtonHandler.setMouseExit());
+            button.setOnAction(ButtonHandler.setSelected());
+
+            //ajouter à la fenetre principale
+            button.setToggleGroup(toggleGroup);
+            Buttons.add(button,i,0);
+           
         }
 
         Buttons.setPadding(new Insets(10));
         return Buttons;
     }
+
+    
+
     public static void main(String[] args) {
         launch(args);
     }
