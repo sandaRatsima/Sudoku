@@ -15,7 +15,7 @@ public class GridHandler {
             Rectangle rectangle = (Rectangle)event.getSource();
             StackPane stackPane = (StackPane)rectangle.getParent();
             fullColor(stackPane);
-            rectangle.setFill(javafx.scene.paint.Color.rgb(181, 123, 133));
+            rectangle.setFill(javafx.scene.paint.Color.rgb(165, 116, 124));
         };
     }
 
@@ -84,7 +84,7 @@ public class GridHandler {
                     Label currentLabel = (Label)grid[i][j].getChildren().get(1);
                     if(currentLabel.getText().equals(label.getText())){
                         Rectangle rectangle = (Rectangle)grid[i][j].getChildren().get(0);
-                        rectangle.setFill(javafx.scene.paint.Color.rgb(217, 178, 184));
+                        rectangle.setFill(javafx.scene.paint.Color.rgb(209 , 161, 169));
                     }
                 }
             }
