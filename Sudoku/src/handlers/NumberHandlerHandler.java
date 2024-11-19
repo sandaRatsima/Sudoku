@@ -58,11 +58,18 @@ public class NumberHandlerHandler {
                 Color color = (Color)rectangle.getFill();
                 if(color.equals(javafx.scene.paint.Color.rgb(165, 116, 124))){
                     Label label = (Label)grid[i][j].getChildren().get(1);
-                    if(!(Sudoku.isInGrid(Integer.parseInt(label.getText()), i, j, MainWindow.getFirstGrid()))){
+                    String text = label.getText();
+
+                    if(text.equals("")){
                         label.setText(number);
                     }
                     else{
-                        ButtonsHandler.showNotModifiable();
+                        if(!(Sudoku.isInGrid(Integer.parseInt(label.getText()), i, j, MainWindow.getFirstGrid()))){
+                            label.setText(number);
+                        }
+                        else{
+                            ButtonsHandler.showNotModifiable();
+                        }
                     }
                 }
             }
