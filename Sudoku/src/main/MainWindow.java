@@ -28,7 +28,7 @@ import modeles.SudokuSolver;
 
 public class MainWindow extends Application{
     static int[][] numbers;
-    static int[][] solution = new int[9][9];
+    static int[][] solution;
     static StackPane[][] SudokuGrid = new StackPane[9][9];
 
     @Override
@@ -71,12 +71,10 @@ public class MainWindow extends Application{
 
         Sudoku sudoku = new Sudoku(3);
         numbers = sudoku.getGrid();
-        if(SudokuSolver.solveBoard(solution)){
-            System.out.println("Solved successfully");
-        }
-        else{
-            System.out.println("Unsolvable Sudoku");
-        }
+        solution = sudoku.getSolution();
+
+        SudokuSolver.printBoard(solution);
+        SudokuSolver.printBoard(numbers);
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -104,7 +102,7 @@ public class MainWindow extends Application{
 
                 SudokuGrid[i][j].getChildren().add(box);
                 SudokuGrid[i][j].getChildren().add(label);
-                gridPane.add(SudokuGrid[i][j],i,j);
+                gridPane.add(SudokuGrid[i][j],j,i);
 
             }
         }
