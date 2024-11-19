@@ -73,7 +73,6 @@ public class SudokuSolver {
 					for(int numberToTry = 1; numberToTry <= GRID_SIZE; numberToTry++){
 						if(isValidPlacement(board, numberToTry, row, column)){
 							board[row][column] = numberToTry;
-
 							if(solveBoard(board)){
 								return true;
 							}

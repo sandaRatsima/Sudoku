@@ -8,5 +8,8 @@ public class Sudoku {
     public int[][] getGrid(){
         return this.grid;
     }
+    public static boolean isInGrid(int number, int row, int col, int[][] grid){
+        return number == grid[row][col];
+     }
 
 }

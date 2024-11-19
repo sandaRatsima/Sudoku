@@ -1,10 +1,13 @@
 package main;
-import handlers.ButtonHandler;
+
+import handlers.NumberHandlerHandler;
+import handlers.ButtonsHandler;
 import handlers.GridHandler;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -20,11 +23,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import modeles.Sudoku;
+import modeles.SudokuSolver;
 
 
 public class MainWindow extends Application{
     static int[][] numbers;
-    static int[][] solution;
+    static int[][] solution = new int[9][9];
     static StackPane[][] SudokuGrid = new StackPane[9][9];
 
     @Override
@@ -35,13 +39,19 @@ public class MainWindow extends Application{
         primaryStage.setWidth(1000);
 
         GridPane main = new GridPane();
-
         GridPane grid = setGrid();
         GridPane buttons = setButtons();
+        GridPane bottomButtons = setBottomButtons();
+
+
         grid.setAlignment(Pos.TOP_CENTER);
         buttons.setAlignment(Pos.BOTTOM_CENTER);
+        bottomButtons.setAlignment(Pos.BOTTOM_CENTER);
+
         main.add(grid, 0, 0);
         main.add(buttons, 0, 1);
+        main.add(bottomButtons, 0, 2);
+
         main.setAlignment(Pos.TOP_CENTER);
 
         Scene scene = new Scene(main);
@@ -61,6 +71,12 @@ public class MainWindow extends Application{
 
         Sudoku sudoku = new Sudoku(3);
         numbers = sudoku.getGrid();
+        if(SudokuSolver.solveBoard(solution)){
+            System.out.println("Solved successfully");
+        }
+        else{
+            System.out.println("Unsolvable Sudoku");
+        }
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -110,9 +126,9 @@ public class MainWindow extends Application{
             button.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.EXTRA_BOLD, 37));
 
             //ajouter les handlers
-            button.setOnMouseEntered(ButtonHandler.setMouseHover());
-            button.setOnMouseExited(ButtonHandler.setMouseExit());
-            button.setOnAction(ButtonHandler.setSelected());
+            button.setOnMouseEntered(NumberHandlerHandler.setMouseHover());
+            button.setOnMouseExited(NumberHandlerHandler.setMouseExit());
+            button.setOnAction(NumberHandlerHandler.setSelected());
 
             //ajouter à la fenetre principale
             button.setToggleGroup(toggleGroup);
@@ -128,6 +144,10 @@ public class MainWindow extends Application{
         return SudokuGrid;
     } 
     
+    public static int[][] getFirstGrid(){
+        return numbers;
+    }
+
     public static void stylePane(){
         StackPane[][] grid = SudokuGrid;
         
@@ -143,6 +163,22 @@ public class MainWindow extends Application{
         }
     }
 
+    public static GridPane setBottomButtons(){
+        GridPane buttons = new GridPane();
+        buttons.setHgap(15);
+
+        Button supprimer = new Button("SUPPRIMER");
+        Button indice = new Button("INDICE");
+        Button abandonner = new Button("ABANDONNER");
+
+        supprimer.setOnMouseClicked(ButtonsHandler.deleteNumber());
+
+        buttons.add(supprimer, 0, 0);
+        buttons.add(indice, 1, 0);
+        buttons.add(abandonner, 2, 0);
+
+        return buttons;
+    }
     public static void main(String[] args) {
         launch(args);
     }

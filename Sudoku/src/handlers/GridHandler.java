@@ -16,6 +16,8 @@ public class GridHandler {
             StackPane stackPane = (StackPane)rectangle.getParent();
             fullColor(stackPane);
             rectangle.setFill(javafx.scene.paint.Color.rgb(165, 116, 124));
+
+            
         };
     }
 
