@@ -59,7 +59,7 @@ public class GameEventsHandler {
 
     public static void showGameWon(){
         if(isWonGame()){
-            Alert alert = new Alert(AlertType.NONE);
+            Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Vous avez gagné");
             alert.setContentText("Vous avez gagné la partie"); 
             alert.showAndWait(); 
@@ -69,7 +69,7 @@ public class GameEventsHandler {
 
     public static void showGameLost(){
         if(MainWindow.getNbErrors()>=3){
-            Alert alert = new Alert(AlertType.NONE);
+            Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Vous avez perdu");
             alert.setContentText("Vous avez pardu la partie"); 
             alert.showAndWait(); 
