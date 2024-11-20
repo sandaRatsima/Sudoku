@@ -36,7 +36,7 @@ public class ButtonsHandler {
     
 
     public static void showNotModifiable(){
-        Alert alert = new Alert(AlertType.INFORMATION);
+        Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Erreur");
         alert.setContentText("Vous ne pouvez modifier cette case"); 
         alert.showAndWait(); 

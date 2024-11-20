@@ -36,7 +36,12 @@ public class MainWindow extends Application{
     static int[][] numbers;
     static int[][] solution;
     static StackPane[][] SudokuGrid = new StackPane[9][9];
+    static GridPane head;
+    static GridPane grid;
+    static GridPane buttons;
+    static GridPane bottomButtons;
     static int timeValue;
+    static int nbErrors = 0;
 
     @Override
     public void start(Stage primaryStage) {
@@ -46,17 +51,17 @@ public class MainWindow extends Application{
         primaryStage.setWidth(1000);
 
         GridPane main = new GridPane();
-        GridPane timer = setTimer();
-        GridPane grid = setGrid();
-        GridPane buttons = setButtons();
-        GridPane bottomButtons = setBottomButtons();
+        head = setHeadGridPane();
+        grid = setGrid();
+        buttons = setButtons();
+        bottomButtons = setBottomButtons();
 
-        timer.setAlignment(Pos.TOP_RIGHT);
+        head.setAlignment(Pos.TOP_RIGHT);
         grid.setAlignment(Pos.TOP_CENTER);
         buttons.setAlignment(Pos.BOTTOM_CENTER);
         bottomButtons.setAlignment(Pos.BOTTOM_CENTER);
 
-        main.add(timer, 0, 0);
+        main.add(head, 0, 0);
         main.add(grid, 0, 1);
         main.add(buttons, 0, 2);
         main.add(bottomButtons, 0, 3);
@@ -191,11 +196,13 @@ public class MainWindow extends Application{
         return buttons;
     }
     
-    public static GridPane setTimer(){
+    public static GridPane setHeadGridPane(){
         GridPane main = new GridPane();
         Label label = new Label("Timer : "+timeValue);
+        Label errors = new Label("Erreurs : "+nbErrors+"/3");
 
         label.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.EXTRA_BOLD, 37));
+        errors.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.EXTRA_BOLD, 37));
 
         Timeline timeLine = new Timeline(
             new KeyFrame(Duration.seconds(1.0), e ->{
@@ -203,14 +210,34 @@ public class MainWindow extends Application{
                 label.setText("Timer : "+timeValue);
             })
         );
+
+        
+
         timeLine.setCycleCount(Timeline.INDEFINITE);
         timeLine.play();
 
-        main.add(label,0,0);
+        main.add(errors,0,0);
+        main.add(label,1,0);
         main.setPadding(new Insets(10,10,10,10));
+        main.setHgap(100);
         return main;
     }
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void setNbErrors(int nombre){
+        nbErrors = nombre;
+        GridPane root = getHead();
+        Label label = (Label)root.getChildren().get(0);
+        label.setText("Erreurs : "+nbErrors+"/3");
+    }
+
+    public static int getNbErrors(){
+        return nbErrors;
+    }
+
+    public static GridPane getHead(){
+        return head;
     }
 }
