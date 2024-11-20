@@ -42,10 +42,8 @@ Le but de ce projet est de créer un jeu de Sudoku convivial où les utilisateur
 ---
 
 ## 📸 Aperçu
+![image](https://github.com/user-attachments/assets/dea62924-dfab-49d5-add3-e69ee0879c2c)
 
-### 🖼️ Interface principale
-
-*Ajoutez ici une capture d'écran de votre interface principale.*
 
 ---
 
