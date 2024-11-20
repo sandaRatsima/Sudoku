@@ -1,5 +1,7 @@
 package handlers;
 
+import java.util.Random;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -33,8 +35,6 @@ public class ButtonsHandler {
         };
     }
 
-    
-
     public static void showNotModifiable(){
         Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Erreur");
@@ -42,5 +42,29 @@ public class ButtonsHandler {
         alert.showAndWait(); 
     }
 
+    public static EventHandler<? super MouseEvent> giveHints(){
+        return event->{
+            oneHint();
+        };
+    }
+    
+    public static void oneHint() {
+        Random random = new Random();
+        StackPane[][] sudoku = MainWindow.getSudokuGrid();
+        int[][] grid = MainWindow.getGridUpdated();
+        int[][] solution = MainWindow.getSolution();
+    
+   
+        int i, j;
+        do {
+            i = random.nextInt(9); 
+            j = random.nextInt(9); 
+        } while (grid[i][j] != 0); 
+    
+        
+        int indice = solution[i][j];
+        Label box = (Label) sudoku[i][j].getChildren().get(1);
+        box.setText(""+indice);
+    }
     
 }

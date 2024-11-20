@@ -62,6 +62,7 @@ public class NumberHandlerHandler {
 
                     if(text.equals("")){
                         label.setText(number);
+                        GridHandler.fullColor(grid[i][j]);
                         GameEventsHandler.verifyAnswer(grid[i][j]);
                         GameEventsHandler.showGameWon();
                         GameEventsHandler.showGameLost();
@@ -69,6 +70,7 @@ public class NumberHandlerHandler {
                     else{
                         if(!(Sudoku.isInGrid(Integer.parseInt(label.getText()), i, j, MainWindow.getFirstGrid()))){
                             label.setText(number);
+                            GridHandler.fullColor(grid[i][j]);
                             GameEventsHandler.verifyAnswer(grid[i][j]);
                             GameEventsHandler.showGameWon();
                             GameEventsHandler.showGameLost();

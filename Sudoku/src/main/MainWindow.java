@@ -36,6 +36,7 @@ public class MainWindow extends Application{
     static int[][] numbers;
     static int[][] solution;
     static StackPane[][] SudokuGrid = new StackPane[9][9];
+    static int[][] gridUpdate;
     static GridPane head;
     static GridPane grid;
     static GridPane buttons;
@@ -188,6 +189,7 @@ public class MainWindow extends Application{
         Button abandonner = new Button("ABANDONNER");
 
         supprimer.setOnMouseClicked(ButtonsHandler.deleteNumber());
+        indice.setOnMouseClicked(ButtonsHandler.giveHints());
 
         buttons.add(supprimer, 0, 0);
         buttons.add(indice, 1, 0);
@@ -239,5 +241,20 @@ public class MainWindow extends Application{
 
     public static GridPane getHead(){
         return head;
+    }
+
+    public static int[][] getGridUpdated(){
+        gridUpdate = new int[9][9];
+        StackPane[][] grid = MainWindow.SudokuGrid;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                StackPane box = grid[i][j];
+                Label label = (Label) box.getChildren().get(1);
+                int number = Integer.parseInt(label.getText());
+                gridUpdate[i][j] = number;
+            }
+        }
+
+        return gridUpdate;
     }
 }
