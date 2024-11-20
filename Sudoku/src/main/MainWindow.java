@@ -1,8 +1,13 @@
 package main;
 
 import handlers.NumberHandlerHandler;
+
+
+
 import handlers.ButtonsHandler;
 import handlers.GridHandler;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,6 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import modeles.Sudoku;
 import modeles.SudokuSolver;
 
@@ -30,6 +36,7 @@ public class MainWindow extends Application{
     static int[][] numbers;
     static int[][] solution;
     static StackPane[][] SudokuGrid = new StackPane[9][9];
+    static int timeValue;
 
     @Override
     public void start(Stage primaryStage) {
@@ -39,18 +46,20 @@ public class MainWindow extends Application{
         primaryStage.setWidth(1000);
 
         GridPane main = new GridPane();
+        GridPane timer = setTimer();
         GridPane grid = setGrid();
         GridPane buttons = setButtons();
         GridPane bottomButtons = setBottomButtons();
 
-
+        timer.setAlignment(Pos.TOP_RIGHT);
         grid.setAlignment(Pos.TOP_CENTER);
         buttons.setAlignment(Pos.BOTTOM_CENTER);
         bottomButtons.setAlignment(Pos.BOTTOM_CENTER);
 
-        main.add(grid, 0, 0);
-        main.add(buttons, 0, 1);
-        main.add(bottomButtons, 0, 2);
+        main.add(timer, 0, 0);
+        main.add(grid, 0, 1);
+        main.add(buttons, 0, 2);
+        main.add(bottomButtons, 0, 3);
 
         main.setAlignment(Pos.TOP_CENTER);
 
@@ -146,6 +155,10 @@ public class MainWindow extends Application{
         return numbers;
     }
 
+    public static int[][] getSolution(){
+        return solution;
+    }
+
     public static void stylePane(){
         StackPane[][] grid = SudokuGrid;
         
@@ -176,6 +189,26 @@ public class MainWindow extends Application{
         buttons.add(abandonner, 2, 0);
 
         return buttons;
+    }
+    
+    public static GridPane setTimer(){
+        GridPane main = new GridPane();
+        Label label = new Label("Timer : "+timeValue);
+
+        label.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.EXTRA_BOLD, 37));
+
+        Timeline timeLine = new Timeline(
+            new KeyFrame(Duration.seconds(1.0), e ->{
+                timeValue++;
+                label.setText("Timer : "+timeValue);
+            })
+        );
+        timeLine.setCycleCount(Timeline.INDEFINITE);
+        timeLine.play();
+
+        main.add(label,0,0);
+        main.setPadding(new Insets(10,10,10,10));
+        return main;
     }
     public static void main(String[] args) {
         launch(args);

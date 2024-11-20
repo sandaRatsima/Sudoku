@@ -62,10 +62,12 @@ public class NumberHandlerHandler {
 
                     if(text.equals("")){
                         label.setText(number);
+                        GameEventsHandler.setColorPlaced(grid[i][j]);
                     }
                     else{
                         if(!(Sudoku.isInGrid(Integer.parseInt(label.getText()), i, j, MainWindow.getFirstGrid()))){
                             label.setText(number);
+                            GameEventsHandler.setColorPlaced(grid[i][j]);
                         }
                         else{
                             ButtonsHandler.showNotModifiable();
@@ -75,6 +77,8 @@ public class NumberHandlerHandler {
             }
         }
     }
+
+
     
 }
 
