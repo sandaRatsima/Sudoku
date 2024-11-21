@@ -2,31 +2,6 @@ package modeles;
 
 public class SudokuSolver {
 	public static final int GRID_SIZE = 9;
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int[][] board = {
-				{ 8, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 3, 6, 0, 0, 0, 0, 0 },
-				{ 0, 7, 0, 0, 9, 0, 2, 0, 0 },
-				{ 0, 5, 0, 0, 0, 7, 0, 0, 0 },
-				{ 0, 0, 0, 0, 4, 5, 7, 0, 0 },
-				{ 0, 0, 0, 1, 0, 0, 0, 3, 0 },
-				{ 0, 0, 1, 0, 0, 0, 0, 6, 8 },
-				{ 0, 0, 8, 5, 0, 0, 0, 1, 0 },
-				{ 0, 9, 0, 0, 0, 0, 4, 0, 0 } 
-		};
-		
-		printBoard(board);
-
-		if(solveBoard(board)){
-			System.out.println("Solved Successfully");
-		}
-		else{System.out.println("Grid Unsolvable");}
-		
-		printBoard(board);
-	}
-
 	private static boolean isNumberInRow(int[][] board, int number, int row){
 		for(int i = 0; i<GRID_SIZE; i++){
 			if (board[row][i] == number){

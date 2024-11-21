@@ -64,7 +64,7 @@ public class ButtonsHandler {
         
         int indice = solution[i][j];
         Label box = (Label) sudoku[i][j].getChildren().get(1);
-        box.setText(""+indice);
+        box.setText(Integer.toString(indice));
     }
     
 }

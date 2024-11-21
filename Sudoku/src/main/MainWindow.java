@@ -57,7 +57,7 @@ public class MainWindow extends Application{
         buttons = setButtons();
         bottomButtons = setBottomButtons();
 
-        head.setAlignment(Pos.TOP_RIGHT);
+        head.setAlignment(Pos.TOP_CENTER);
         grid.setAlignment(Pos.TOP_CENTER);
         buttons.setAlignment(Pos.BOTTOM_CENTER);
         bottomButtons.setAlignment(Pos.BOTTOM_CENTER);
@@ -250,7 +250,13 @@ public class MainWindow extends Application{
             for (int j = 0; j < grid.length; j++) {
                 StackPane box = grid[i][j];
                 Label label = (Label) box.getChildren().get(1);
-                int number = Integer.parseInt(label.getText());
+                int number;
+                if(label.getText().equals("")){
+                    number = 0;
+                }
+                else{
+                    number = Integer.parseInt(label.getText());
+                }
                 gridUpdate[i][j] = number;
             }
         }
