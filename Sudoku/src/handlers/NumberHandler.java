@@ -6,13 +6,14 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import main.MainWindow;
 import modeles.Sudoku;
 
-public class NumberHandlerHandler {
+public class NumberHandler {
     public static javafx.event.EventHandler<? super MouseEvent> setMouseHover() {
         return event ->{
             ToggleButton button = (ToggleButton)event.getSource();
@@ -62,6 +63,7 @@ public class NumberHandlerHandler {
 
                     if(text.equals("")){
                         label.setText(number);
+                        setClickable();
                         GridHandler.fullColor(grid[i][j]);
                         GameEventsHandler.verifyAnswer(grid[i][j]);
                         GameEventsHandler.showGameWon();
@@ -70,6 +72,7 @@ public class NumberHandlerHandler {
                     else{
                         if(!(Sudoku.isInGrid(Integer.parseInt(label.getText()), i, j, MainWindow.getFirstGrid()))){
                             label.setText(number);
+                            setClickable();
                             GridHandler.fullColor(grid[i][j]);
                             GameEventsHandler.verifyAnswer(grid[i][j]);
                             GameEventsHandler.showGameWon();
@@ -84,7 +87,35 @@ public class NumberHandlerHandler {
         }
     }
 
+    public static void setClickable(){
+        GridPane numbers = MainWindow.getNumbersButton();
+        for (int i = 0; i < 9; i++) {
+            ToggleButton button = (ToggleButton)numbers.getChildren().get(i);
+            int numberInButton = Integer.parseInt(button.getText());
+            if(countNumbersInGrid(numberInButton) == 9){
+                button.setOpacity(0);
+            }
+        }
+    }
 
+    public static int countNumbersInGrid(int number){
+        StackPane[][] grid = MainWindow.getSudokuGrid();
+        int count =0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                Label label = (Label)grid[i][j].getChildren().get(1);
+                if(label.getText() != ""){
+                    int numberInBox = Integer.parseInt(label.getText());
+                    if(GameEventsHandler.isCorrectlyPlaced(numberInBox,i,j)){
+                        if(number == numberInBox){
+                            count++;
+                        }
+                    }
+                }
+            }
+        }
+        return count;
+    }
     
 }
 

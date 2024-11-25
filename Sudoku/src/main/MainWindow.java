@@ -1,6 +1,6 @@
 package main;
 
-import handlers.NumberHandlerHandler;
+import handlers.NumberHandler;
 
 
 
@@ -43,6 +43,7 @@ public class MainWindow extends Application{
     static GridPane bottomButtons;
     static int timeValue;
     static int nbErrors = 0;
+    static int nbHints = 1;
 
     @Override
     public void start(Stage primaryStage) {
@@ -139,9 +140,9 @@ public class MainWindow extends Application{
             button.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.EXTRA_BOLD, 37));
 
             //ajouter les handlers
-            button.setOnMouseEntered(NumberHandlerHandler.setMouseHover());
-            button.setOnMouseExited(NumberHandlerHandler.setMouseExit());
-            button.setOnAction(NumberHandlerHandler.setSelected());
+            button.setOnMouseEntered(NumberHandler.setMouseHover());
+            button.setOnMouseExited(NumberHandler.setMouseExit());
+            button.setOnAction(NumberHandler.setSelected());
 
             //ajouter à la fenetre principale
             button.setToggleGroup(toggleGroup);
@@ -202,9 +203,11 @@ public class MainWindow extends Application{
         GridPane main = new GridPane();
         Label label = new Label("Timer : "+timeValue);
         Label errors = new Label("Erreurs : "+nbErrors+"/3");
+        Label hints = new Label("Indice : "+nbHints);
 
         label.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.EXTRA_BOLD, 37));
         errors.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.EXTRA_BOLD, 37));
+        hints.setFont(Font.font("Lucida Console", javafx.scene.text.FontWeight.EXTRA_BOLD, 37));
 
         Timeline timeLine = new Timeline(
             new KeyFrame(Duration.seconds(1.0), e ->{
@@ -220,6 +223,7 @@ public class MainWindow extends Application{
 
         main.add(errors,0,0);
         main.add(label,1,0);
+        main.add(hints,2,0);
         main.setPadding(new Insets(10,10,10,10));
         main.setHgap(100);
         return main;
@@ -262,5 +266,17 @@ public class MainWindow extends Application{
         }
 
         return gridUpdate;
+    }
+
+    public static GridPane getNumbersButton(){
+        return buttons;
+    }
+
+    public static int getNbHints(){
+        return nbHints;
+    }
+
+    public static void setnbHints(int number){
+        nbHints = number;
     }
 }

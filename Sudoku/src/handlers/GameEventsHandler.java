@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 import main.MainWindow;
 
 public class GameEventsHandler {
-    private static boolean isCorrectlyPlaced(int number, int row, int column){
+   public static boolean isCorrectlyPlaced(int number, int row, int column){
         StackPane[][] grid = MainWindow.getSudokuGrid();
         int[][] solution = MainWindow.getSolution();
 

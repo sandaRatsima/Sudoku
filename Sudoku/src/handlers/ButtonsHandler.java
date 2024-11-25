@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -49,22 +50,36 @@ public class ButtonsHandler {
     }
     
     public static void oneHint() {
-        Random random = new Random();
-        StackPane[][] sudoku = MainWindow.getSudokuGrid();
-        int[][] grid = MainWindow.getGridUpdated();
-        int[][] solution = MainWindow.getSolution();
-    
-   
-        int i, j;
-        do {
-            i = random.nextInt(9); 
-            j = random.nextInt(9); 
-        } while (grid[i][j] != 0); 
-    
+        if(MainWindow.getNbHints() > 0 ){
+            GridPane main = MainWindow.getHead();
+            Random random = new Random();
+            StackPane[][] sudoku = MainWindow.getSudokuGrid();
+            int[][] grid = MainWindow.getGridUpdated();
+            int[][] solution = MainWindow.getSolution();
         
-        int indice = solution[i][j];
-        Label box = (Label) sudoku[i][j].getChildren().get(1);
-        box.setText(Integer.toString(indice));
+    
+            int i, j;
+            do {
+                i = random.nextInt(9); 
+                j = random.nextInt(9); 
+            } while (grid[i][j] != 0); 
+        
+            Label hints = (Label)main.getChildren().get(2);
+            int indice = solution[i][j];
+            Label box = (Label) sudoku[i][j].getChildren().get(1);
+            box.setText(Integer.toString(indice));
+            int nbIndice = MainWindow.getNbHints()-1;
+            hints.setText("Indice : "+nbIndice);
+            MainWindow.setnbHints(nbIndice);
+            NumberHandler.setClickable();
+            GameEventsHandler.showGameWon();
+        }
+        else{
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Plus d'indice");
+            alert.setContentText("Vous n'avez plus d'indice disponible"); 
+            alert.showAndWait(); 
+        }
     }
     
 }
